@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom"
-import { useState
- } from "react"
+import { useState } from "react"
 export default function Register() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmpassword, setConfirmpassword] = useState('')
   async function register(ev) {
     ev.preventDefault()
-    await fetch('http://localhost:9000/register',{
+    const response = await fetch('http://localhost:9000/register',{
       method: 'POST',
       body: JSON.stringify({username,password,confirmpassword}),
       headers: {'Content-Type':'application/json'}
     })
+    console.log(response)
+    if(response.status === 200){
+      alert('Registration Successful')
+    }else{
+      alert('Registration Failed')
+    }
   }
   
   return (
