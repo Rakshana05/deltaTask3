@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import { useState } from "react"
 
 export default function Login() {
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
+    const [redirect,setRedirect] = useState(false)
     async function login(ev){
         ev.preventDefault()
-        await fetch('http://localhost:9000/',{
+        const response = await fetch('http://localhost:9000/',{
             method: 'POST',
             body: JSON.stringify({username,password}),
             headers: {'Content-Type':'application/json'}
-         })
+        })
+        if (response.ok){
+            setRedirect(true)
+        }else{
+            alert("Wrong credentials")
+        }
+    }
+
+    if (redirect) {
+        return <Navigate to={'/home'} />
     }
     return (
         <div className="login">

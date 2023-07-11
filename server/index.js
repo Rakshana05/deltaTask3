@@ -28,7 +28,17 @@ app.post('/register',async(req,res)=>{
 app.post('/',async (req,res)=>{
     const {username,password} = req.body
     const userDoc = await User.findOne({username})
-    res.json(userDoc)
+    const passOk = password===userDoc.password
+    if (passOk) {
+        // Logged In
+    } else {
+        res.status(400).json('wrong credentials')
+    }
+    res.json({1: password,2: userDoc.password,3: password===userDoc.password})
+})
+
+app.get('/home',(req,res)=>{
+    res.json("Home")
 })
 app.listen(9000)
 
