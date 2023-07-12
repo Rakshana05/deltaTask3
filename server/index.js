@@ -9,6 +9,8 @@ app.use(express.json())
 
 mongoose.connect('mongodb+srv://quiz:B33rxzYhGf8wL8tH@cluster0.0fbv2pq.mongodb.net/?retryWrites=true&w=majority')
 
+var userInfo;
+
 app.post('/register',async(req,res)=>{
     const {username,password,confirmpassword} = req.body
     if(password===confirmpassword){
@@ -31,6 +33,7 @@ app.post('/',async (req,res)=>{
     const passOk = password===userDoc.password
     if (passOk) {
         // Logged In
+        userInfo = userDoc
     } else {
         res.status(400).json('wrong credentials')
     }
@@ -38,7 +41,19 @@ app.post('/',async (req,res)=>{
 })
 
 app.get('/home',(req,res)=>{
-    res.json("Home")
+    // try{
+    //     res.json({username: userInfo.username,id: userInfo.id})
+    // } catch (e) {
+    //     res.status(500).json("Login")
+    // }
+    res.json({username: userInfo.username,id: userInfo.id})
+
+})
+
+app.post('/logout',(req,res)=>{
+    userInfo = null
+    res.json("logged out")
+
 })
 app.listen(9000)
 
