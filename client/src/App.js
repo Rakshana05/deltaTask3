@@ -6,17 +6,18 @@ import Home from './components/Home';
 import Logout from './components/Logout';
 
 import {Route,Routes} from "react-router-dom"
-
+import { UserContextProvider } from './UserContext';
 function App() {
   
   return (
-    <Routes>
-      <Route index element={<Login />} />
-      <Route path={'/register'} element={<Register />} />
-      <Route path={'/home'} element={<Home />} />
-      <Route path={'/logout'} element={<Logout />} />
-    </Routes>
-    
+    <UserContextProvider>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route path={'/register'} element={<Register />} />
+        <Route path={'/home'} element={<Home />} />
+        <Route path={'/logout'} element={<Logout />} />
+      </Routes>
+    </UserContextProvider>
   );
 }
 

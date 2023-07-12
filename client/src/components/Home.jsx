@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, Navigate } from "react-router-dom"
+import { UserContext } from '../UserContext';
 
 export default function Home(){
-    const [username,setUsername] = useState(false)
+    const {setUserInfo,userInfo} = useContext(UserContext)
     useEffect(()=>{
         fetch('http://localhost:9000/home').then(response=>{
             response.json().then(userInfo => {
-                setUsername(userInfo.username)
+                setUserInfo(userInfo)
             })
         })        
     },[])
- 
-    function logout() {
-        fetch('http://localhost:9000/logout',{
-            method: 'POST',
-        })
-        return <Navigate to={'/logout'} />
-    }
-    
+
+    const username = userInfo?.username
     return username ? ( 
     <div className="home">
         <h2>Welcome {username}</h2>
