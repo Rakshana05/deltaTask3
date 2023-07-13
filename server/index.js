@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require("cors")
 const mongoose = require('mongoose')
 const User = require('./models/User')
+const Quiz = require('./models/Quiz')
 const app = express() 
 
 app.use(cors())
@@ -50,10 +51,20 @@ app.get('/home',(req,res)=>{
 
 })
 
+app.post('/quiz',async(req,res)=>{
+    const {quizName,Questions} = req.body
+    try{
+        const QuizSet = await Quiz.create({quizName,Questions,user:new mongoose.Types.ObjectId(userInfo.id)})
+        res.json(QuizSet)
+    } catch (e) {
+        res.status(500).json("Quiz not created")
+    }
+    
+})
+
 app.post('/logout',(req,res)=>{
     userInfo = null
     res.json("logged out")
-
 })
 app.listen(9000)
 
