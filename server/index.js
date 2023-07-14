@@ -63,6 +63,11 @@ app.get('/viewquiz',async(req,res)=>{
     res.json(userQuizzes)
 })
 
+app.get('/search',async(req,res)=>{
+    const users = await User.find().select('username')
+    res.json(users)
+})
+
 app.post('/logout',(req,res)=>{
     userInfo = null
     res.json("logged out")

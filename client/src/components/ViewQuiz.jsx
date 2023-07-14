@@ -20,7 +20,7 @@ export default function ViewQuiz(details){
               {props.quizName}
             </span>
             <a href="/play">Play</a>
-            <a href="/edit">Edit</a></>):""}
+            </>):""}
             
           </dt>
         </div>
