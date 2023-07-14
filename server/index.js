@@ -11,6 +11,7 @@ app.use(express.json())
 mongoose.connect('mongodb+srv://quiz:B33rxzYhGf8wL8tH@cluster0.0fbv2pq.mongodb.net/?retryWrites=true&w=majority')
 
 var userInfo;
+var userId;
 
 app.post('/register',async(req,res)=>{
     const {username,password,confirmpassword} = req.body
@@ -35,6 +36,7 @@ app.post('/',async (req,res)=>{
     if (passOk) {
         // Logged In
         userInfo = userDoc
+        userId = new mongoose.Types.ObjectId(userInfo.id)
     } else {
         res.status(400).json('wrong credentials')
     }
@@ -42,24 +44,23 @@ app.post('/',async (req,res)=>{
 })
 
 app.get('/home',(req,res)=>{
-    // try{
-    //     res.json({username: userInfo.username,id: userInfo.id})
-    // } catch (e) {
-    //     res.status(500).json("Login")
-    // }
-    res.json({username: userInfo.username,id: userInfo.id})
-
+    res.json({username: userInfo.username,id: userId})
 })
 
 app.post('/quiz',async(req,res)=>{
     const {quizName,Questions} = req.body
     try{
-        const QuizSet = await Quiz.create({quizName,Questions,user:new mongoose.Types.ObjectId(userInfo.id)})
+        const QuizSet = await Quiz.create({quizName,Questions,user:userId})
         res.json(QuizSet)
     } catch (e) {
         res.status(500).json("Quiz not created")
     }
     
+})
+
+app.get('/viewquiz',async(req,res)=>{
+    const userQuizzes = await Quiz.find()
+    res.json(userQuizzes)
 })
 
 app.post('/logout',(req,res)=>{
