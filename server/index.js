@@ -68,6 +68,12 @@ app.get('/search',async(req,res)=>{
     res.json(users)
 })
 
+app.get('/play/:id',async(req,res)=>{
+    const {id} = req.params
+    const quizDoc = await Quiz.findById(id).populate('user',['username'])
+    res.json(quizDoc)
+})
+
 app.post('/logout',(req,res)=>{
     userInfo = null
     res.json("logged out")

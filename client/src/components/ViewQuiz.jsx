@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-
+import { Link } from "react-router-dom"
 
 export default function ViewQuiz(details){
     const [quizzes,setQuizzes] = useState([])
@@ -19,7 +19,7 @@ export default function ViewQuiz(details){
             {details.id===props.creator ? ( <><span className="quizName">
               {props.quizName}
             </span>
-            <a href="/play">Play</a>
+            <Link to={`/play/${props.id}`}>Play</Link>
             </>):""}
             
           </dt>
@@ -29,9 +29,10 @@ export default function ViewQuiz(details){
 
     function showQuiz(quiz){
       return (
-        <Entry key={quiz.id} 
+        <Entry key={quiz._id} 
         quizName={quiz.quizName}
-        creator={quiz.user} />
+        creator={quiz.user}
+        id={quiz._id} />
       )
     }
     return(<div>
