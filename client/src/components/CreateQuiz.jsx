@@ -4,15 +4,14 @@ import QuestionSet from "./create/Questionset"
 export default function CreateQuiz() {
     const [quizName,setQuizName] = useState("")
     const QuestionArray = []
-    for(let i=0;i<2;i++){
+    for(let i=0;i<5;i++){
         QuestionArray.push(<QuestionSet key={i} />)
     }
 
     async function handleSubmit(ev){
         ev.preventDefault()
-        let question = []
         const questions = []
-        const no_qns = 2
+        const no_qns = 5
         let n=1
         while(n<(6*no_qns)){
             questions.push({
@@ -45,12 +44,12 @@ export default function CreateQuiz() {
         }
     }
 
-    return (<div>
-        <h3>You can create 10 questions, with 4 options each</h3>
+    return (<div className="createView">
+        <h3 className="createHeading">You can create 10 questions, with 4 options each</h3>
         {/* <button onClick={}>Add another question</button> */}
         
         <form onSubmit={handleSubmit} >
-            <input type="text" name="quizName" value={quizName} onChange={ev=>setQuizName(ev.target.value)} placeholder="Quiz Name" />
+            <input className="createQuizname"  type="text" name="quizName" value={quizName} onChange={ev=>setQuizName(ev.target.value)} placeholder="Quiz Name" />
             {QuestionArray}
             <button>Finish</button>
         </form>

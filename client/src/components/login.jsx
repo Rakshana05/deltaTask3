@@ -28,21 +28,20 @@ export default function Login() {
     if (redirect) {
         return <Navigate to={'/home'} />
     }
+
     return (
         <div className="login">
-            <div className="welcome">
-                <h2>Login and continue to Quizz</h2>
+            <div className="loginText">
+                <h2>Login and continue to QuizzHub</h2>
             </div>
             <form className="loginForm" onSubmit={login}>
                 <input name="username" type="text" placeholder="Username" onChange={ev => setUsername(ev.target.value)} value={username} />
                 <input name="pasword" type="password" placeholder="Password" onChange={ev => setPassword(ev.target.value)} value={password} />
                 <button>Login</button>
             </form>
-            <div className="down">
-                <p>
-                New to Quizz?
-                <Link to="/register">Register</Link>
-                </p>
+            <div className="loginFooter">
+                <p>New to Quizz?</p>
+                <Link to="/register" className="loginLink"><span>Register</span></Link>
             </div>
         </div>
     )

@@ -20,23 +20,24 @@ export default function Search() {
     }
     return (
         <div>
-            <h3>USERS LIST</h3>
-                <input 
-                    type="text" 
-                    placeholder="Search name" 
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    />
-            <div>  
-            <ul>
-            {filteredUsers.map(user => (
-                <li key={user._id}>
-                    <button onClick={()=>handleClick(user._id,user.username)}>{user.username}</button>
-                </li>   
-            ))}
-            </ul>
+            <div className="searchBar">
+            <input 
+                
+                type="text" 
+                placeholder="Search by name" 
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="searchDetails">  
+                <ul className="searchResults">
+                {filteredUsers.map(user => (
+                    <li key={user._id}>
+                        <button onClick={()=>handleClick(user._id,user.username)}>{user.username}</button>
+                    </li>   
+                ))}
+                </ul>
             </div>
-            <h3>Quizzes of {userInfo.username}</h3>
+            </div>
             <ViewQuiz key={userInfo.id} username={userInfo.username} id={userInfo.id} />
         </div>
     )

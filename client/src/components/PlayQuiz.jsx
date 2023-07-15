@@ -71,8 +71,9 @@ export default function Play(){
         }
 
     }
-    return(<div>
-        <h2>{quizInfo.quizName}</h2>
+    return(<div className="quizView">
+        <h2 className="quizName">{(quizInfo.quizName).toUpperCase()}</h2>
+        <hr className="hrStyle"/>
         {!currentDetails.quizEnd ? (
             <Question 
                 question={questions[currentDetails.currentQuestion]}

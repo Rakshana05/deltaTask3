@@ -12,19 +12,16 @@ export default function ViewQuiz(details){
     },[])
 
     function Entry(props) {
-      return (
-        <div className="term">
-          <dt>
-           
-            {details.id===props.creator ? ( <><span className="quizName">
-              {props.quizName}
-            </span>
-            <Link to={`/play/${props.id}`}>Play</Link>
-            </>):""}
-            
-          </dt>
-        </div>
-      )
+      console.log(details.id,props.creator,details.username)
+      if(details.id===props.creator){
+      return  (
+        <dt className="quizTerm">
+          <span>
+            {props.quizName}
+          </span>
+          <Link className="playLink" to={`/play/${props.id}`}>Play</Link>
+        </dt>
+      )}
     }
 
     function showQuiz(quiz){
@@ -35,7 +32,11 @@ export default function ViewQuiz(details){
         id={quiz._id} />
       )
     }
-    return(<div>
-        <dl>{quizzes.map(showQuiz)}</dl>
+
+    
+    return(<div className="listView">
+        <h3 className="listHeading">Quizzes of {details.username}</h3>
+        <hr className="hrStyle"/>
+        <dl className="listItems">{quizzes.map(showQuiz)}</dl>
     </div>)
 }

@@ -15,9 +15,15 @@ export default function Home(){
     const username = userInfo?.username
     return username ? ( 
     <div className="home">
-        <h2>Welcome {username}</h2>
-        <Link to="/create">Create a quiz</Link>
-        <Link to="/logout">Logout</Link>
-        <Search /> 
+        <div className="homeNav">
+        <h2 className="homeText">Welcome to QuizzHub <span style={{color:"white"}}>{username}</span></h2>
+        <div className="homeLinks">
+            <Link to="/create" className="homeLink">Create a quiz</Link>
+            <Link to="/logout" className="homeLink">Logout</Link>
+            </div>
+        </div>
+        <div className="homeSearch">
+        <Search className="homeSearch"/> 
+        </div>
     </div>) : (<div>User not registered</div>)
 }

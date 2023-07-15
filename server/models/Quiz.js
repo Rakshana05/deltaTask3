@@ -10,7 +10,6 @@ const QuizSchema = new mongoose.Schema({
         d:String,
         ans: {
             type: String,
-            enum: ["a","b","c","d"]
         }
     }],
     user: {type:mongoose.Schema.Types.ObjectId, ref:'User'}

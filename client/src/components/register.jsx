@@ -21,8 +21,8 @@ export default function Register() {
   
   return (
     <div className="login">
-    <div className="welcome" style={{ height: "30%" }}>
-      <h2>Register and start to Quizz</h2>
+    <div className="loginText">
+      <h2>Register and start to QuizzHub</h2>
     </div>
     <form className="loginForm" onSubmit={register}>
       <input
@@ -48,11 +48,9 @@ export default function Register() {
       />
       <button>Register</button>
     </form>
-    <div className="down">
-      <p>
-        Know Quizz?
-        <Link to="/">Login</Link>
-      </p>
+    <div className="loginFooter">
+      <p>Know Quizz?</p>
+      <Link to="/" className="loginLink">Login</Link>
     </div>
   </div>
   )

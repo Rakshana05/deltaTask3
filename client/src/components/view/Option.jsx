@@ -4,10 +4,11 @@ import React from "react";
 function Options(props) {
   const {options, selectedOption, onOptionChange} = props
   return (
-    <div style={{ margin: "0" }}>
+    <div >
       {options.map((option, index) => (
         <div key={index}>
           <input
+            className="quizOption"
             type="radio"
             name="option"
             value={option}
